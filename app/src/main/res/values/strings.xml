@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">Profile</string>
+    <string name="NfcNotEnabled">Nfc no está habilitado</string>
+    <string name="name">Nombre</string>
+    <string name="email_or_fb">Correo o Facebook</string>
+    <string name="phone_number">Teléfono</string>
+    <string name="age">Edad</string>
+    <string name="save">Guardar</string>
+    <string name="nfc_instructions">Acerca tu Brazalete</string>
+    <string name="delete_data">Eliminar Data</string>
+    <string name="save_data">Guardar Data</string>
+    <string name="str_ok">OK</string>
+    <string name="scan_qr">Scan QR</string>
+    <string name="error_failed_to_scan_qr">Failed to scan QR</string>
+    <string name="invalid_qr">Codigo QR no valido</string>
+    <array name="gender">
+        <item>Género</item>
+        <item>Hombre</item>
+        <item>Mujer</item>
+        <item>Otro</item>
+    </array>
+</resources>

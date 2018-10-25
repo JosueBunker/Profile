@@ -1,0 +1,71 @@
+private final int WRITE_REQUEST_CODE = 43;
+    private void createFile(String mimeType, String fileName) {
+
+        Intent intent = new Intent(Intent.ACTION_CREATE_DOCUMENT);
+
+        // Filter to only show results that can be "opened", such as
+        // a file (as opposed to a list of contacts or timezones).
+        intent.addCategory(Intent.CATEGORY_OPENABLE);
+
+        // Create a file with the requested MIME type.
+        intent.setType(mimeType);
+        intent.putExtra(Intent.EXTRA_TITLE, fileName);
+        startActivityForResult(intent, WRITE_REQUEST_CODE);
+    }
+
+    public void exportDB(){
+        createFile("application/x-sqlite3","dbBackup");
+    }
+
+    public void sendEmail(){
+        String s = "";
+        MailClass mailTask = new MailClass(MainActivity.this);
+        mailTask.execute(s);
+        Log.i("DB", this.getDatabasePath(DataBaseHelper.DATABASE_NAME).toString());
+    }
+
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode,
+                                 Intent resultData) {
+        Log.i("onActivityResult", "inside");
+        // The ACTION_OPEN_DOCUMENT intent was sent with the request code
+        // READ_REQUEST_CODE. If the request code seen here doesn't match, it's the
+        // response to some other intent, and the code below shouldn't run at all.
+
+        if (requestCode == WRITE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // The document selected by the user won't be returned in the intent.
+            // Instead, a URI to that document will be contained in the return intent
+            // provided to this method as a parameter.
+            // Pull that URI using resultData.getData().
+            Uri uri = null;
+            if (resultData != null) {
+                uri = resultData.getData();
+                Log.i("onActivityResult", "Uri: " + uri.toString());
+                alterDocument(uri);
+            }
+        }
+    }
+
+    private void alterDocument(Uri uri) {
+        String currentDBPath = "/data/"+ "com.bunker.access.box" +"/databases/"+DataBaseHelper.DATABASE_NAME;
+        File data = Environment.getDataDirectory();
+        File currentDB = new File(data, currentDBPath);
+        try {
+            FileChannel source = new FileInputStream(currentDB).getChannel();
+            ParcelFileDescriptor pfd = this.getContentResolver().openFileDescriptor(uri, "w");
+            FileChannel destination = new FileOutputStream(pfd.getFileDescriptor()).getChannel();
+
+            destination.transferFrom(source, 0, source.size());
+            source.close();
+            destination.close();
+            Toast.makeText(this, "DB Exported!", Toast.LENGTH_LONG).show();
+
+        } catch (FileNotFoundException e) {
+            Log.e("alterDocument","FileNotFound",e);
+        } catch (IOException e){
+            Log.e("alterDocument","IOException",e);
+        }
+    }
+    ///---------------------------------------------------------------------------------------------

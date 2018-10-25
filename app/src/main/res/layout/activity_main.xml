@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.activity.MainActivity">
+
+    <LinearLayout
+        android:id="@+id/splash_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/logo_bunker"/>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/layout_main_activity"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/buttons_center"
+            android:layout_marginTop="150dp"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageButton
+                android:id="@+id/button_open_nfc_activity"
+                android:backgroundTint="@android:color/white"
+                android:onClick="openNfcActivity"
+                android:layout_margin="10dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_nfc_scan_black"/>
+
+            <ImageButton
+                android:id="@+id/button_open_profile_activity"
+                android:backgroundTint="@android:color/white"
+                android:onClick="openQrActivity"
+                android:layout_margin="10dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:src="@drawable/ic_person_black_" />
+
+        </LinearLayout>
+
+
+        <ImageButton
+            android:id="@+id/button_reports_activity"
+            android:backgroundTint="@android:color/white"
+            android:layout_gravity="center"
+            android:layout_margin="10dp"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/ic_insert_chart_black_24dp"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>
